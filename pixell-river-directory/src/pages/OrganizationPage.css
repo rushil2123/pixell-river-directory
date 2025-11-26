@@ -1,0 +1,143 @@
+/* ===== Organization Page — same look as Employees ===== */
+
+/* Grid layout (reuse Employees grid) */
+.roles-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 2rem;
+  align-items: start;
+}
+
+/* Role card (style <details> like cards) */
+.role-details {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: .75rem;
+  padding: .75rem 1rem;
+  box-shadow: 0 2px 6px rgba(0,0,0,.05);
+  transition: box-shadow .2s ease, transform .08s ease, background .2s ease;
+}
+.role-details:hover {
+  box-shadow: 0 6px 16px rgba(0,0,0,.10);
+  transform: translateY(-1px);
+}
+.role-details[open] {
+  box-shadow: 0 4px 12px rgba(0,0,0,.10);
+}
+
+/* Summary header (title + person) */
+.role-details > summary {
+  cursor: pointer;
+  list-style: none;
+  user-select: none;
+  outline: none;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .5rem;
+  padding: .25rem 0 .5rem 0;
+  border-bottom: 1px dashed var(--border);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.role-details > summary::-webkit-details-marker { display: none; }
+.role-details > summary::after {
+  content: "⌄";
+  font-size: .95rem;
+  color: var(--muted-fg, #777);
+  transform: translateY(-1px) rotate(0deg);
+  transition: transform .15s ease;
+}
+.role-details[open] > summary::after {
+  transform: translateY(-1px) rotate(180deg);
+}
+
+/* Body */
+.role-body {
+  margin-top: .6rem;
+  color: var(--text);
+}
+.role-body p { margin: 0 0 .35rem 0; }
+.role-body small { color: #888; }
+
+/* Shared toolbar / search */
+.toolbar {
+  display: flex;
+  gap: .5rem;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-bottom: 1rem;
+}
+.input {
+  width: 100%;
+  max-width: 460px;
+  padding: .6rem .8rem;
+  border: 1px solid var(--border);
+  border-radius: .6rem;
+  background: var(--card-bg);
+  color: var(--fg, #222);
+  outline: none;
+  transition: border-color .15s ease, box-shadow .15s ease;
+}
+.input::placeholder { color: var(--muted-fg, #7a7a7a); }
+.input:focus {
+  border-color: var(--accent, #4f46e5);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent, #4f46e5) 20%, transparent);
+}
+
+/* Add form + buttons (same as Employees) */
+.form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
+  margin-bottom: 1rem;
+}
+.form .input { max-width: 280px; }
+
+.btn {
+  appearance: none;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--fg, #222);
+  padding: .55rem .9rem;
+  border-radius: .55rem;
+  cursor: pointer;
+  transition: background .15s ease, box-shadow .15s ease, transform .05s ease;
+}
+.btn:hover { box-shadow: 0 2px 8px rgba(0,0,0,.08); }
+.btn:active { transform: translateY(1px); }
+.btn:focus-visible {
+  outline: 2px solid var(--accent, #4f46e5);
+  outline-offset: 2px;
+}
+.btn-primary {
+  border-color: var(--accent, #4f46e5);
+  background: var(--accent, #4f46e5);
+  color: #fff;
+}
+.btn-primary:hover { filter: brightness(0.96); }
+
+/* Error (shared) */
+.error {
+  color: #d32f2f;
+  font-size: 0.95rem;
+  margin-top: 4px;
+}
+
+/* Flash effect for newly added roles (optional) */
+@keyframes flashIn {
+  0%   { background: color-mix(in srgb, var(--accent, #4f46e5) 18%, transparent); }
+  100% { background: transparent; }
+}
+.flash {
+  animation: flashIn 1.2s ease-out 1;
+  border-radius: .35rem;
+  padding: .05rem .2rem;
+}
+
+/* Responsive */
+@media (max-width: 520px) {
+  .roles-grid { grid-template-columns: 1fr; }
+  .form { flex-direction: column; align-items: stretch; }
+  .form .input { max-width: 100%; }
+}
