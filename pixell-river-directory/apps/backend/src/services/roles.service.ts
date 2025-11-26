@@ -6,9 +6,9 @@ export async function listRoles(search?: string) {
     where: search
       ? {
           OR: [
-            { title: { contains: search, mode: "insensitive" } },
-            { person: { contains: search, mode: "insensitive" } },
-            { description: { contains: search, mode: "insensitive" } }
+            { title: { contains: search} },
+            { person: { contains: search} },
+            { description: { contains: search} }
           ]
         }
       : undefined,
