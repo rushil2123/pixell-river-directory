@@ -6,8 +6,8 @@ export async function listEmployees(search?: string) {
     where: search
       ? {
           OR: [
-            { name: { contains: search, mode: "insensitive" } },
-            { department: { contains: search, mode: "insensitive" } }
+            { name: { contains: search} },
+            { department: { contains: search} }
           ]
         }
       : undefined,
